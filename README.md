@@ -1,75 +1,50 @@
-# React + TypeScript + Vite
+# Scramble Words
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A word-unscrambling game built with React + TypeScript. Guess the original word from its shuffled letters, with an error counter, limited skips, and a score.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- shadcn/ui (Button, Input, Card)
+- lucide-react (icons)
+- State managed with `useReducer`
 
-## React Compiler
+## How to play
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- A word is shown with its letters scrambled.
+- Type your guess and press **Enviar Adivinanza** (Submit Guess).
+- A correct guess earns a point and moves to the next word.
+- A wrong guess adds to the error counter (max 3 before game over).
+- You can skip a word (max 3 skips).
+- Once the words run out or the max errors are reached, a summary is shown along with a **Jugar de nuevo** (Play Again) option.
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev      # start dev server
+npm run build    # production build (tsc + vite build)
+npm run preview  # preview the build
+npm run lint     # run ESLint
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project structure
 
 ```
+src/
+├── ScrambleWords.tsx           # Main game component
+├── reducer/
+│   └── scrambleWorldReducer.ts # Game state, actions, and logic
+└── components/ui/              # shadcn/ui components (Button, Input, Card)
+```
+
+## Prerequisites
+
+This project uses [shadcn/ui](https://ui.shadcn.com/docs/installation/vite) components.
